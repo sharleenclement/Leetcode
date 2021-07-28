@@ -11,6 +11,8 @@
  */
 class Solution {
 public:
+    /*
+    TC: O(N^2), SC: O(N)
     vector<int> v;
     int height(TreeNode* root)
     {
@@ -52,6 +54,38 @@ public:
             v.clear();
         }
         
+        return x;
+    }
+    */
+    
+    vector<vector<int>> levelOrder(TreeNode* root) 
+    {
+        vector<vector<int>> x;
+        if (!root) 
+            return x;
+        queue<TreeNode*> q;
+        q.push(root);
+        
+        while(!q.empty())
+        {
+            int len = q.size();
+            vector<int> v;
+            for(int i=0;i<len;++i)
+            {
+                TreeNode* first = q.front();
+                v.push_back(first->val);
+                q.pop();
+                if(first->left)
+                {
+                    q.push(first->left);
+                }
+                if(first->right)
+                {
+                    q.push(first->right);
+                }
+            }
+            x.push_back(v);
+        }
         return x;
     }
 };
