@@ -15,8 +15,13 @@ public:
         if(root==NULL)
             return 0;
         
-        int ls = countNodes(root->left);
-        int rs = countNodes(root->right);
+        int ls = 0, rs = 0;
+        
+        if(root->left)
+        ls = countNodes(root->left);
+        
+        if(root->right)
+        rs = countNodes(root->right);
         
         return ls + rs + 1;
     }
