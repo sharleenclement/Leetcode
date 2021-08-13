@@ -11,6 +11,10 @@
  */
 class Solution {
 public:
+    /*
+    
+    TC: O(N^2)
+    
     int height(TreeNode* root)
     {
         if(root==NULL)
@@ -31,5 +35,31 @@ public:
             return 1;
         
         return 0;
+    }
+    */
+    bool ans;
+    int balanceCheck(TreeNode* root)
+    {
+        if(!root)
+            return 0;
+        
+        if(!ans)
+            return 0;
+        
+        int ls = balanceCheck(root->left);
+        int rs = balanceCheck(root->right);
+        
+        if(abs(ls-rs)>=2)
+            ans = false;
+        
+        return max(ls, rs) + 1;
+        
+    }
+    
+    bool isBalanced(TreeNode* root)
+    {
+        ans = true;
+        int x = balanceCheck(root);
+        return ans;
     }
 };
