@@ -1,22 +1,44 @@
 class Solution {
 public:
     int findJudge(int n, vector<vector<int>>& trust) {
-        vector<int> v1(n, 0);
-        vector<int> v2(n, 0);
-        int i;
-        for(i=0;i<trust.size();++i)
+        multimap<int,int>mp;
+        map<int,int>mp2;
+        int k=n-1;
+        int y=0;
+        if(n==1)
+            return 1;
+        for(int i=0;i<trust.size();i++)
         {
-            v1[trust[i][0]-1]++;
-            v2[trust[i][1]-1]++;
+            mp.insert({trust[i][0],trust[i][1]});
         }
-        int maxi = *max_element(v2.begin(), v2.end());
-        if(maxi!=(n-1))
+        for(auto j:mp)
+        {
+            // cout << "j " << j.first << " " << j.second << endl;
+            mp2[j.second]++;
+        }
+        for(auto x:mp2)
+        {
+            // cout << "x " << x.first << " "  << x.second << endl;
+            if(x.second==k)
+              y=x.first;  
+        }
+        if(y==0)
             return -1;
-        for(i=0;i<n;++i)
+        int c=0;
+        for(int i=1;i<=n;++i)
         {
-            if(v1[i]==0)
-                return i+1;
+            // cout << mp.count(i) << endl;
+            if(mp.count(i)>0)
+                c++;
         }
-        return -1;
+        // cout << c << "  fin " << n << endl;
+        if(c==n)
+            return -1;
+        for(auto itr:mp)
+        {
+            if(mp.count(y)==1)
+               return -1;
+        }
+        return y;
     }
 };
