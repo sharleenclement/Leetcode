@@ -1,14 +1,6 @@
 class Solution {
 public:
     int romanToInt(string s) {
-        vector<pair<string,int>> v;
-        
-        string s1[13] = {"I", "V", "X", "L", "C", "D", "M", "IV", "IX", "XL", "XC", "CD", "CM"};
-        int arr[13] = {1, 5, 10, 50, 100, 500, 1000, 4, 9, 40, 90, 400, 900};
-        
-        for(int i=0;i<13;++i)
-        v.push_back(make_pair(s1[i], arr[i]));
-        
         int ans = 0;
         for(int i=0; i<s.size(); i++)  
         {  
