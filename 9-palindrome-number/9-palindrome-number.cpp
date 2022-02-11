@@ -1,9 +1,15 @@
 class Solution {
 public:
     bool isPalindrome(int x) {
-        string s1 = to_string(x);
-        string s2 = s1;
-        reverse(s2.begin(), s2.end());
-        return s1==s2;
+        if(x<0|| (x!=0 && x%10==0)) 
+            return false;
+        
+        int sum=0;
+        while(x>sum)
+        {
+            sum = sum*10+x%10;
+            x = x/10;
+        }
+        return (x==sum)||(x==sum/10);
     }
 };
