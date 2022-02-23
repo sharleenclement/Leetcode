@@ -1,38 +1,52 @@
 class Solution {
 public:
- string commonPrefixUtil(string str1, string str2)
+ int findMinLength(vector<string> S, int n)
 {
-    string result;
-    int n1 = str1.length(), n2 = str2.length();
- 
-    for (int i=0, j=0; i<=n1-1&&j<=n2-1; i++,j++)
-    {
-        if (str1[i] != str2[j])
-            break;
-        result.push_back(str1[i]);
-    }
-    return (result);
+    int min = INT_MAX;
+  
+    for (int i=0; i<=n-1; i++)
+        if (S[i].length() < min)
+            min = S[i].length();
+    return(min);
 }
-string longestCommonPrefix1(vector<string> S, int low, int high)
+  
+bool allContainsPrefix(vector<string> S, int n, string str,
+                       int start, int end)
 {
-    if (low == high)
-        return (S[low]);
- 
-    if (high > low)
+    for (int i=0; i<=n-1; i++)
+        for (int j=start; j<=end; j++)
+            if (S[i][j] != str[j])
+                return (false);
+    return (true);
+}
+string longestCommonPrefix1(vector<string> S, int n)
+{
+    int index = findMinLength(S, n);
+    string prefix; 
+    int low = 0, high = index;
+  
+    while (low <= high)
     {
         int mid = low + (high - low) / 2;
- 
-        string str1 = longestCommonPrefix1(S, low, mid);
-        string str2 = longestCommonPrefix1(S, mid+1, high);
- 
-        return (commonPrefixUtil(str1, str2));
+  
+        if (allContainsPrefix (S, n, S[0], low, mid))
+        {
+            prefix = prefix + S[0].substr(low, mid-low+1);
+            low = mid + 1;
+        }
+  
+        else 
+            high = mid - 1;
     }
-    return "";
+  
+    return (prefix);
 }
+
+
     string longestCommonPrefix(vector<string> v)
     {
-        int low = 0, high = v.size()-1;
-        return longestCommonPrefix1(v, low, high);
+        int low = 0, high = v.size();
+        return longestCommonPrefix1(v, high);
     }
 
 };
