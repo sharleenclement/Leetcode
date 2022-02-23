@@ -1,52 +1,39 @@
 class Solution {
-public:
- int findMinLength(vector<string> S, int n)
-{
-    int min = INT_MAX;
-  
-    for (int i=0; i<=n-1; i++)
-        if (S[i].length() < min)
-            min = S[i].length();
-    return(min);
-}
-  
-bool allContainsPrefix(vector<string> S, int n, string str,
-                       int start, int end)
-{
-    for (int i=0; i<=n-1; i++)
-        for (int j=start; j<=end; j++)
-            if (S[i][j] != str[j])
-                return (false);
-    return (true);
-}
-string longestCommonPrefix1(vector<string> S, int n)
-{
-    int index = findMinLength(S, n);
-    string prefix; 
-    int low = 0, high = index;
-  
-    while (low <= high)
+public: 
+    
+    string commonPrefix(string s1, string s2)
     {
-        int mid = low + (high - low) / 2;
-  
-        if (allContainsPrefix (S, n, S[0], low, mid))
+        string ans = "";
+        for(int i=0;i<s1.size() && i<s2.size();++i)
         {
-            prefix = prefix + S[0].substr(low, mid-low+1);
-            low = mid + 1;
+            if(s1[i]==s2[i])
+            ans += s1[i];
+            else
+            break;
         }
-  
-        else 
-            high = mid - 1;
+        return ans;
     }
-  
-    return (prefix);
-}
-
+    
+    string divideAndConquer(vector<string> v, int low, int high)
+    {
+        if(low==high)
+        return v[low];
+        
+        while(low<high)
+        {
+            int mid = low + (high - low)/2;
+            
+            string s1 = divideAndConquer(v, low, mid);
+            string s2 = divideAndConquer(v, mid+1, high);
+            
+            return commonPrefix(s1, s2);
+        }
+        return "";
+    }
 
     string longestCommonPrefix(vector<string> v)
     {
-        int low = 0, high = v.size();
-        return longestCommonPrefix1(v, high);
+        int low = 0, high = v.size()-1; 
+        return divideAndConquer(v, low, high);
     }
-
 };
