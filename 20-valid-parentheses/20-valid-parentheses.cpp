@@ -11,21 +11,9 @@ public:
             {
                 st.push(ch);
             }
-            else if(ch==')')
+            else
             {
-                if(st.empty() || st.top()!='(')
-                   return false;
-                st.pop();
-            }
-            else if(ch==']')
-            {
-                if(st.empty() || st.top()!='[')
-                   return false;
-                st.pop();
-            }
-            else if(ch=='}')
-            {
-                if(st.empty() || st.top()!='{')
+                if(st.empty() || (ch==')' && st.top()!='(') || (ch==']' && st.top()!='[') || (ch=='}' && st.top()!='{'))
                    return false;
                 st.pop();
             }
