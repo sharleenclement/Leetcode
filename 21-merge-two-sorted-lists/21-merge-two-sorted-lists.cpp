@@ -1,7 +1,14 @@
-class Solution {
+
+    class Solution {
 public:
     
     ListNode* mergeTwoLists(ListNode* first, ListNode* second) {
+        
+        if(first==NULL)
+            return second;
+        if(second==NULL)
+            return first;
+        
         ListNode* f = first;
 		ListNode* s = second;
 		ListNode* dummy = new ListNode(-1);
