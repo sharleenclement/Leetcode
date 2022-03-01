@@ -6,9 +6,9 @@ public:
         if(n==1)
             return n;
         
-        for(i=0;i<n;++i)
+        for(i=0;i<n-1;++i)
         {
-            if((i+1)!=n && nums[i]==nums[i+1])
+            if(nums[i]==nums[i+1])
             {
                 nums[i] = INT_MIN;
                 k--;
