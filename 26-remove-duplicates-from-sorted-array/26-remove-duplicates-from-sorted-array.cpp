@@ -15,6 +15,7 @@ public:
         }
         
         nums[k++] = nums[n-1];
+        
         return k;
     }
 };
