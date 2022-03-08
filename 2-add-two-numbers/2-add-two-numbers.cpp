@@ -12,20 +12,20 @@ class Solution {
 public:
     
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-    int c = 0;
-    // ListNode newHead(0);
-    ListNode *t = new ListNode();
-    ListNode *head = t;
-
-    while(c || l1 || l2) {
-        c += (l1? l1->val : 0) + (l2? l2->val : 0);
-        head->next = new ListNode(c%10);
-        head = head->next;
-        c /= 10;
-        if(l1) l1 = l1->next;
-        if(l2) l2 = l2->next;
-    }
         
-    return t->next;
+        if(!l1 && !l2)
+            return NULL;
+    
+        int c = (l1? l1->val : 0) + (l2? l2->val : 0);
+        ListNode* t = new ListNode(c%10);
+        ListNode* head = l1? l1->next : NULL;
+        c = c/10;
+        if(head) 
+            head->val += c;
+        else if(c) 
+            head = new ListNode(c);
+        t->next = addTwoNumbers(l2? l2->next:NULL, head);
+        
+        return t;
     }
 };
