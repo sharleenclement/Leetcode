@@ -1,27 +1,25 @@
 class Solution {
 public:
-    int lastStoneWeight(vector<int>& stones) {
-        int i=0, j, n=stones.size(), temp;
-        while(n>1)
+    int lastStoneWeight(vector<int>& s) {
+        make_heap(s.begin(), s.end());
+        while(s.size()>1)
         {
-            sort(stones.begin(), stones.end());
-            if(stones[n-i-1]==stones[n-i-2])
-            {
-                stones.pop_back();
-                stones.pop_back();
-                n = n-2;
-            }
-            else
-            {
-                temp = stones[n-i-2];
-                stones.erase(stones.end()-2);
-                n--;
-                stones[n-i-1] -= temp;
-            }
+            int x = s.front();
+            pop_heap(s.begin(), s.end());
+            s.pop_back();
+            
+            int y = s.front();
+            pop_heap(s.begin(), s.end());
+            s.pop_back();
+            
+            if(x==y)
+                continue;
+            
+            int ans = (x-y);
+            s.push_back(ans);
+            push_heap(s.begin(), s.end());
         }
-        if(n==0)
-            return 0;
-        
-        return stones[i];
+       
+        return s.size() ? s.front() : 0;
     }
 };
