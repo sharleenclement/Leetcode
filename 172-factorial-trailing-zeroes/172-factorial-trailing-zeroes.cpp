@@ -5,11 +5,8 @@ public:
         
         while(n!=0)
         {
-            int div = n/pow(5, i);
-            ans += div;
-            if(div==0)
-                break;
-            i++;
+            ans += n/5;
+            n /= 5;
         }
         
         return ans;
