@@ -1,67 +1,25 @@
 class Solution {
 public:
     int largestSumAfterKNegations(vector<int>& nums, int k) {
-        sort(nums.begin(), nums.end());
-        int i, sum=0, c=0, z=0;
-                
-        for(i=0;i<nums.size();++i)
+        priority_queue<int, vector<int>, greater<int>> pq(nums.begin(), nums.end()); 
+        // min heap
+        int top, ans=0;
+        
+        while(k--)
         {
-            if(nums[i]<0)
-                c++;
-            else if(nums[i]==0)
-                z++;
-            else
-                break;
+            top = pq.top();
+            pq.pop();
+            
+            pq.push(-1*top);
         }
         
-        if(c==k or (c<k and z>0))
+        while(!pq.empty())
         {
-            for(i=0;i<nums.size();++i)
-            {
-                sum = sum + abs(nums[i]);
-            }
+            top = pq.top();
+            ans += top;
+            pq.pop();
         }
-        else
-        {
-            for(i=0;i<nums.size();++i)
-            {
-                if(k>0)
-                {
-                    if(c>0)
-                    {
-                        nums[i] = abs(nums[i]);
-                        sum = sum + nums[i];
-                        k--;
-                        c--;
-                    }
-                    else
-                    {
-                        if(k%2==0)
-                        sum += nums[i];
-                        else
-                        {
-                            if(i>0 && nums[i]>nums[i-1])
-                            {
-                                sum += -(nums[i-1]*2);
-                                i--;
-                            }
-                            else
-                                sum += -nums[i];
-                        }
-                        k=0;
-                    }
-                }
-                else 
-                    sum += nums[i];
-            }
-            if(k>0)
-            {
-                nums[i-1] = k%2==0?nums[i-1]:-(nums[i-1]*2);
-                sum += nums[i-1];
-            }    
-            
-        }
-
-        return sum;
+        
+        return ans;
     }
 };
