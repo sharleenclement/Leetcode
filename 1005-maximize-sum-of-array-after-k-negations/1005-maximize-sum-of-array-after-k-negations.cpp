@@ -78,15 +78,3 @@ public:
         return sum;
     }
 };
-// if(k>0 && nums[i]<0)
-// {
-//     nums[i] = -nums[i];
-//     k--;
-// }
-// else if(nums[i]>0)
-// sum += nums[i];
-// nums[0] = k%2==0?nums[0]:-nums[0];
-//             for(i=0;i<nums.size();++i)
-//             {
-//                 sum = sum + nums[i];
-//             }
