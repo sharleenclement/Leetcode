@@ -21,19 +21,6 @@ public:
                 sum = sum + abs(nums[i]);
             }
         }
-        else if(c>k)
-        {
-            for(i=0;i<nums.size();++i)
-            {
-                if(k>0)
-                {
-                    sum = sum + abs(nums[i]);
-                    k--;
-                }
-                else 
-                    sum += nums[i];
-            }
-        }
         else
         {
             for(i=0;i<nums.size();++i)
