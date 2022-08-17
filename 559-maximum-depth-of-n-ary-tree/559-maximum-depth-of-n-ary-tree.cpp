@@ -24,7 +24,7 @@ public:
         if(root==NULL)
             return 0;
         
-        int maxi = 1, i;
+        int i, maxi = 1;
         for(i=0;i<root->children.size();++i)
         {
             int ls = maxDepth(root->children[i]);
