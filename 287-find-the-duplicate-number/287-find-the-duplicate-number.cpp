@@ -7,14 +7,14 @@ public:
         {
             while(slow!=fast)
             {
-                slow = nums[slow];
-                fast = nums[nums[fast]];
+                slow = nums[slow]; // 1 step
+                fast = nums[nums[fast]]; // 2 steps
             }
             
             fast = 0;
             while(slow!=fast)
             {
-                slow = nums[slow];
+                slow = nums[slow]; 
                 fast = nums[fast];
             }
         }
