@@ -10,7 +10,7 @@ public:
             {
                 if(j==i or j==0)
                 v.push_back(1);
-                else if(j!=0 and j!=n-1)
+                else
                 {
                     v.push_back(vec[i-1][j-1]+vec[i-1][j]);
                 }
