@@ -1,15 +1,13 @@
 class Solution {
 public:
     bool isPalindrome(int x) {
-        if(x<0|| (x!=0 && x%10==0)) 
-            return false;
-        
-        int sum=0;
-        while(x>sum)
-        {
-            sum = sum*10+x%10;
-            x = x/10;
+        string num=to_string(x);
+        int flag=1;
+        for(int i=0;i<num.length();i++){
+            if(num[i]!=num[(num.length()-1)-i]){
+                flag=0;
+            }
         }
-        return (x==sum)||(x==sum/10);
+        return flag;
     }
 };
