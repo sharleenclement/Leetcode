@@ -1,29 +1,54 @@
 class Solution {
 public:
-    void setZeroes(vector<vector<int>>& matrix) {
-        int i, j;
-        set<int> l;
-        set<int> r;
-        for(i=0;i<matrix.size();++i)
+    void setZeroes(vector<vector<int>>& arr) {
+        int i, j, n = arr.size(), m = arr[0].size();
+    
+        for(i=0;i<n;++i)
         {
-            for(j=0;j<matrix[i].size();++j)
+            for(j=0;j<m;++j)
             {
-                if(matrix[i][j]==0)
+                if(arr[i][j]==0)
                 {
-                    l.insert(i);
-                    r.insert(j);
+                    int f1 = i-1;
+                    while(f1>=0)
+                    {
+                        if(arr[f1][j]!=0)
+                        arr[f1][j] = INT_MIN+1;
+                        f1--;
+                    }
+
+                    f1 = i+1;
+                    while(f1<n)
+                    {
+                        if(arr[f1][j]!=0)
+                        arr[f1][j] = INT_MIN+1;
+                        f1++;
+                    }
+
+                    int f2 = j-1;
+                    while(f2>=0)
+                    {
+                        if(arr[i][f2]!=0)
+                        arr[i][f2] = INT_MIN+1;
+                        f2--;
+                    }
+
+                    f2 = j+1;
+                    while(f2<m)
+                    {
+                        if(arr[i][f2]!=0)
+                        arr[i][f2] = INT_MIN+1;
+                        f2++;
+                    }
                 }
             }
         }
-        for(i=0;i<matrix.size();++i)
+
+        for(i=0;i<n;++i)
         {
-            for(j=0;j<matrix[i].size();++j)
-            {
-                auto it1 = l.find(i);
-                auto it2 = r.find(j);
-                if(it1!=l.end() or it2!=r.end())
-                    matrix[i][j] = 0;
-            }
+            for(j=0;j<m;++j)
+            if(arr[i][j]==INT_MIN+1)
+            arr[i][j] = 0;
         }
     }
 };
