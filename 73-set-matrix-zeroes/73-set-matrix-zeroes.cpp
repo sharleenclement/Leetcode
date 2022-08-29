@@ -3,43 +3,22 @@ public:
     void setZeroes(vector<vector<int>>& arr) {
         int i, j, n = arr.size(), m = arr[0].size();
     
+        int mat1[n], mat2[m];
+
+        for(i=0;i<n;++i)
+        mat1[i] = INT_MAX;
+
+        for(i=0;i<m;++i)
+        mat2[i] = INT_MAX;
+
         for(i=0;i<n;++i)
         {
             for(j=0;j<m;++j)
             {
                 if(arr[i][j]==0)
                 {
-                    int f1 = i-1;
-                    while(f1>=0)
-                    {
-                        if(arr[f1][j]!=0)
-                        arr[f1][j] = INT_MIN+1;
-                        f1--;
-                    }
-
-                    f1 = i+1;
-                    while(f1<n)
-                    {
-                        if(arr[f1][j]!=0)
-                        arr[f1][j] = INT_MIN+1;
-                        f1++;
-                    }
-
-                    int f2 = j-1;
-                    while(f2>=0)
-                    {
-                        if(arr[i][f2]!=0)
-                        arr[i][f2] = INT_MIN+1;
-                        f2--;
-                    }
-
-                    f2 = j+1;
-                    while(f2<m)
-                    {
-                        if(arr[i][f2]!=0)
-                        arr[i][f2] = INT_MIN+1;
-                        f2++;
-                    }
+                    mat1[i] = 0;
+                    mat2[j] = 0;
                 }
             }
         }
@@ -47,8 +26,12 @@ public:
         for(i=0;i<n;++i)
         {
             for(j=0;j<m;++j)
-            if(arr[i][j]==INT_MIN+1)
-            arr[i][j] = 0;
+            {
+                if(mat1[i]==0 or mat2[j]==0)
+                {
+                    arr[i][j] = 0;
+                }
+            }
         }
     }
 };
