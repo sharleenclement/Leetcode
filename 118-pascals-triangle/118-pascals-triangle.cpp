@@ -2,7 +2,7 @@ class Solution {
 public:
     long binomial_coeff(int n, int k)
     {
-        if(k>n)
+        if(k>n-k)
             k = n - k;
         
         long i, a = 1;
