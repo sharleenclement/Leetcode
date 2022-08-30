@@ -1,27 +1,26 @@
 class Solution {
 public:
-    vector<vector<int>> vec;
-    vector<vector<int>> heap_p(vector<int>& nums, int s, int e) {
+    void heap_p(vector<int>& nums, int s, int e, vector<vector<int>>& vec) {
         if(s==1)
         {
             vec.push_back(nums);
-            return vec;
+            return;
         } 
         
         for(int i=0;i<s;++i)
         {
-            vec = heap_p(nums, s-1, e);
+            heap_p(nums, s-1, e, vec);
             if(s%2==0)
                 swap(nums[0], nums[s-1]);
             else
                 swap(nums[i], nums[s-1]);
         }
-        
-        return vec;
     }
     
     vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> vec;
         int n = nums.size();
-        return heap_p(nums, n, n);
+        heap_p(nums, n, n, vec);
+        return vec;
     }
 };
