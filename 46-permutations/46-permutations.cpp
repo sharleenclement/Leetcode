@@ -1,33 +1,27 @@
 class Solution {
 public:
-    void p(vector<int>& nums, vector<int>& ans, vector<vector<int>>& fin, int *freq) {
-        if(ans.size()==nums.size())
+    vector<vector<int>> vec;
+    vector<vector<int>> heap_p(vector<int>& nums, int s, int e) {
+        if(s==1)
         {
-            fin.push_back(ans);
-            return;
+            vec.push_back(nums);
+            return vec;
         } 
         
-        for(int i=0;i<nums.size();++i)
+        for(int i=0;i<s;++i)
         {
-            if(freq[i]!=1)
-            {
-                ans.push_back(nums[i]);
-                freq[i] = 1;
-                p(nums, ans, fin, freq);
-                ans.pop_back();
-                freq[i] = 0;
-            }
+            vec = heap_p(nums, s-1, e);
+            if(s%2==0)
+                swap(nums[0], nums[s-1]);
+            else
+                swap(nums[i], nums[s-1]);
         }
-
+        
+        return vec;
     }
     
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<int> ans;
-        vector<vector<int>> fin;
-        int freq[nums.size()];
-        for(int i=0;i<nums.size();++i)
-            freq[i] = 0;
-        p(nums, ans, fin, freq);
-        return fin;
+        int n = nums.size();
+        return heap_p(nums, n, n);
     }
 };
