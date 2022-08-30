@@ -1,25 +1,33 @@
 class Solution {
 public:
-    vector<vector<int>> vec;
-    vector<vector<int>> p(vector<int>& nums, int s, int e) {
-        if(s==e)
+    void p(vector<int>& nums, vector<int>& ans, vector<vector<int>>& fin, int *freq) {
+        if(ans.size()==nums.size())
         {
-            vec.push_back(nums);
-            return vec;
+            fin.push_back(ans);
+            return;
         } 
         
-        for(int i=s;i<=e;++i)
+        for(int i=0;i<nums.size();++i)
         {
-            swap(nums[s], nums[i]);
-            vec = p(nums, s+1, e);
-            swap(nums[s], nums[i]);
+            if(freq[i]!=1)
+            {
+                ans.push_back(nums[i]);
+                freq[i] = 1;
+                p(nums, ans, fin, freq);
+                ans.pop_back();
+                freq[i] = 0;
+            }
         }
-        
-        return vec;
+
     }
     
     vector<vector<int>> permute(vector<int>& nums) {
-        int n = nums.size();
-        return p(nums, 0, n-1);
+        vector<int> ans;
+        vector<vector<int>> fin;
+        int freq[nums.size()];
+        for(int i=0;i<nums.size();++i)
+            freq[i] = 0;
+        p(nums, ans, fin, freq);
+        return fin;
     }
 };
