@@ -16,12 +16,11 @@ public:
     }
 
     vector<vector<int>> generate(int numRows) {
-        int i, j, n = numRows, c=1;
+        int i, j, n = numRows;
         vector<vector<int>> vec;
         for(i=1;i<=n;++i)
         {
             vector<int> v;
-            c = 1;
             for(j=1;j<=i;++j)
             {
                 if(j==1 or j==i)
