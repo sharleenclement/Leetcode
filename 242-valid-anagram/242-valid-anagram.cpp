@@ -1,30 +1,21 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {        
-        int i, n=s.length(), m=t.length();
+        int freq1[27]={0}, freq2[27]={0}, i, n=s.length(), m=t.length();
         
         if(n!=m)
             return false;
         
-        priority_queue<char> q1;
-        priority_queue<char> q2;
-        
         for(i=0;i<n;++i)
-        {
-            q1.push(s[i]);
-        }
+            freq1[s[i]-'a']++;
         
         for(i=0;i<m;++i)
-        {
-            q2.push(t[i]);
-        }
+            freq2[t[i]-'a']++;
         
-        while(!q1.empty())
+        for(i=0;i<27;++i)
         {
-            if(q1.top()!=q2.top())
+            if(freq1[i]!=freq2[i])
                 return false;
-            q1.pop();
-            q2.pop();
         }
         
         return true;
