@@ -24,7 +24,7 @@ public:
                     curr2 = max(curr2, intervals[j][1]);
             }
             
-            // curr2 = max(curr2, intervals[i][1]);
+            curr2 = max(curr2, intervals[i][1]);
             
             vec.push_back({curr1, curr2});
         }
