@@ -18,10 +18,8 @@ public:
 
                 nums2[k-1] = first;
             }
-            // cout << i << " " << j;
             while(j<n)
                 nums1[i++] = nums2[j++];
         }
-        
     }
 };
