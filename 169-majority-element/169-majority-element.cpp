@@ -7,7 +7,7 @@ public:
         if(n==1)
             return 1;
         
-        for(i=0;i<n-1;++i) // 2 3 3
+        for(i=0;i<n-1;++i) 
         {
             if(nums[i]==nums[i+1])
                 c++;
