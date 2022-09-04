@@ -1,18 +1,21 @@
 class Solution {
 public:    
-    int uniquePaths(int m, int n) {
-        vector<int> dp(n, 0);
-        dp[0] = 1;
-        int i, j;
-        
-        for(i=0;i<m;++i)
+    int combi(int n, int k)
+    {
+        if(k>n-k)
+            k = n-k;
+        long int a=1, i;
+        for(i=0;i<k;++i)
         {
-            for(j=1;j<n;++j)
-            {
-                dp[j] += dp[j-1];
-            }
+            a *= n-i;
+            a /= i+1;
         }
         
-        return dp[n-1];
+        return a;
+    }
+    int uniquePaths(int m, int n) {
+        int i;
+        int maxi = m+n-2, path;
+        return combi(maxi, m-1);
     }
 };
