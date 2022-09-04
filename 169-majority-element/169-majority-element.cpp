@@ -1,28 +1,19 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        int n = nums.size(), c=1, ans, i;
-        sort(nums.begin(), nums.end());
-        
-        if(n==1)
-            return 1;
-        
-        for(i=0;i<n-1;++i) 
+        // count will always c>=1 as even if everything gets cancelled that one element will remain
+        int i, n = nums.size(), c=0, elem=nums[0];
+        for(i=0;i<n;++i)
         {
-            if(nums[i]==nums[i+1])
+            if(c<=0)
+                elem = nums[i];
+            if(elem==nums[i])
                 c++;
             else
-            {
-                if(c>n/2)
-                    return nums[i-1];
-                else
-                    c = 1;
-            }
+                c--;
         }
         
-        if(c>n/2)
-            return nums[i-1];
-        
-        return -1;
+        return elem;
+            
     }
 };
