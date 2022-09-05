@@ -4,10 +4,7 @@ public:
         int i, j, k, n = nums.size(), s, e, mid;
         long ans = 0;
         set<vector<int>> svec;
-        vector<pair<int, int>> p;
-        for(i=0;i<n;++i)
-            p.push_back(make_pair(nums[i], i));
-        sort(p.begin(), p.end());
+        sort(nums.begin(), nums.end());
         for(i=0;i<n;++i)
         {
             for(j=i+1;j<n;++j)
@@ -15,23 +12,23 @@ public:
                 for(k=j+1;k<n;++k)
                 {
                     vector<int> v;
-                    ans = (long)p[i].first + (long)p[j].first + (long)p[k].first;
+                    ans = (long)nums[i] + (long)nums[j] + (long)nums[k];
                     s = k+1;
                     e = n-1;
                     while(s<=e)
                     {
                         mid = s + (e-s)/2;
-                        if(p[mid].first+ans==target)
+                        if(nums[mid]+ans==target)
                         {
-                            v.push_back(p[mid].first);
-                            v.push_back(p[i].first);
-                            v.push_back(p[j].first);
-                            v.push_back(p[k].first);
+                            v.push_back(nums[i]);
+                            v.push_back(nums[j]);
+                            v.push_back(nums[k]);
+                            v.push_back(nums[mid]);
                             sort(v.begin(),v.end());
                             svec.insert(v);
                             break;
                         }
-                        else if(p[mid].first+ans<target)
+                        else if(nums[mid]+ans<target)
                             s = mid + 1;
                         else
                             e = mid - 1;
