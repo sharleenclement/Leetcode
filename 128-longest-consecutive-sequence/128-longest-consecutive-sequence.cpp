@@ -13,7 +13,7 @@ public:
             s.insert(i);
         }
         
-        for(int i: nums)
+        for(int i: s)
         {
             if(!s.count(i-1)) // checking if the prev element is present
             {
