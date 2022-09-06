@@ -6,27 +6,26 @@ public:
         if(n==0 or n==1)
             return n;
         
-        sort(nums.begin(), nums.end());
-        vector<int> dis;
-        int i, c=0, ans=0; 
-        dis.push_back(nums[0]);
-        
-        for(i=1;i<n;++i)
+        set<int> s;
+        int c=1, ans=0, currentval;
+        for(int i: nums)
         {
-            if(nums[i-1]!=nums[i])
-            {
-                dis.push_back(nums[i]);
-            }
+            s.insert(i);
         }
         
-        for(i=0;i<dis.size();++i)
+        for(int i: nums)
         {
-            if(i>0 && dis[i-1]+1==dis[i])
+            if(!s.count(i-1)) // checking if the prev element is present
             {
-                c++;
-            }
-            else
+                currentval = i;
                 c = 1;
+                
+                while(s.count(currentval+1)) // checking if the next element is present
+                {
+                    currentval += 1;
+                    c++;
+                }
+            }
             
             ans = max(ans, c);
         }
