@@ -1,28 +1,35 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        int LongestStreak = 1, ans = 0;
-set<int> st;
-for (auto i : nums)
-{
-st.insert(i);
-}
-int temp = INT_MIN;
-for (auto it = st.begin(); it != st.end(); it++)
-{
-if (temp + 1 == (*it))
-{
-LongestStreak++;
-temp = (*it);
-ans = max(ans, LongestStreak);
-}
-else
-{
-LongestStreak = 1;
-temp = (*it);
-ans = max(ans, LongestStreak);
-}
-}
-return ans;
+        int n = nums.size();
+        
+        if(n==0 or n==1)
+            return n;
+        
+        set<int> s;
+        int c=1, ans=0, currentval;
+        for(int i: nums)
+        {
+            s.insert(i);
+        }
+        
+        for(int i: s)
+        {
+            if(!s.count(i-1)) // checking if the prev element is present
+            {
+                currentval = i;
+                c = 1;
+                
+                while(s.count(currentval+1)) // checking if the next element is present
+                {
+                    currentval += 1;
+                    c++;
+                }
+            }
+            
+            ans = max(ans, c);
+        }
+        
+        return ans;
     }
 };
