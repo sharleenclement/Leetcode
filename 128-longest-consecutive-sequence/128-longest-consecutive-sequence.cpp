@@ -3,20 +3,31 @@ public:
     int longestConsecutive(vector<int>& nums) {
         int n = nums.size();
         
-        if(n==0)
-            return 0;
+        if(n==0 or n==1)
+            return n;
         
         sort(nums.begin(), nums.end());
-        int ans = 1, prev = nums[0], c = 1, i; 
+        vector<int> dis;
+        int i, c=0, ans=0; 
+        dis.push_back(nums[0]);
         
         for(i=1;i<n;++i)
         {
-            if(nums[i]==prev+1)
+            if(nums[i-1]!=nums[i])
+            {
+                dis.push_back(nums[i]);
+            }
+        }
+        
+        for(i=0;i<dis.size();++i)
+        {
+            if(i>0 && dis[i-1]+1==dis[i])
+            {
                 c++;
-            else if(nums[i]!=prev) // same elements are counted as a part of the sequence
-                c=1;
+            }
+            else
+                c = 1;
             
-            prev = nums[i];
             ans = max(ans, c);
         }
         
