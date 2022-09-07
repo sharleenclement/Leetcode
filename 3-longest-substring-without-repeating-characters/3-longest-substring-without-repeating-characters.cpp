@@ -4,20 +4,19 @@ public:
         int l=0, r, ans = INT_MIN, n = s.length();
         if(n==0 or n==1)
             return n;
-        unordered_set<int> st;
+        vector<int> v(256, -1);
+        
         for(r=0;r<n;++r)
         {
-            if(st.find(s[r])!=st.end())
+            if(v[s[r]]!=-1)
             {
-                while(l<r && st.find(s[r])!=st.end())
-                {
-                    st.erase(s[l]);
-                    l++;
-                }    
+                l = max(v[s[r]]+1, l);
             }
-            st.insert(s[r]);
+            
+            v[s[r]] = r;
             ans = max(ans, r-l+1);
         }
+        
         return ans;
     }
 };
