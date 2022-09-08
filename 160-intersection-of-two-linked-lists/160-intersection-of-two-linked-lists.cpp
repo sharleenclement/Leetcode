@@ -11,16 +11,17 @@ public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         ListNode* x = headA;
         ListNode* y = headB;
+        unordered_set<ListNode*> st;
         while(x!=NULL)
         {
-            y = headB;
-            while(y!=NULL)
-            {
-                if(x==y)
-                    return x;
-                y = y->next;
-            }
+            st.insert(x);
             x = x->next;
+        }
+        while(y!=NULL)
+        {
+            if(st.find(y)!=st.end())
+                return y;
+            y = y->next;
         }
         return NULL;
     }
