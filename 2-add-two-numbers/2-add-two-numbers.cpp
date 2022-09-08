@@ -11,49 +11,31 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int carry=0, value=0, ans=0;
-        ListNode* l = l1;
-        ListNode* prev;
-        ListNode* n = new ListNode(0);
-        ListNode* fin = n;
-        while(l1!=NULL and l2!=NULL)
+        int carry=0, value=0, sum=0;
+        ListNode* l = new ListNode(-1);
+        ListNode* temp = l;
+        while((l1!=NULL or l2!=NULL) or carry)
         {
-            ans = l1->val + l2->val + carry;// 99 99 = 19 8
-            carry = ans/10;
-            value = ans%10;
-            ListNode* k = new ListNode(value);
-            l1 = l1->next;
-            l2 = l2->next;
-            n->next = k;
-            n = n->next;
+            sum = 0;
+            if(l1!=NULL)
+            {
+                sum += l1->val;
+                l1 = l1->next;
+            }
+            
+            if(l2!=NULL)
+            {
+                sum += l2->val;
+                l2 = l2->next;
+            }
+            
+            sum += carry;
+            carry = sum/10;
+            ListNode* n = new ListNode(sum%10);
+            temp->next = n;
+            temp = temp->next;
         }
-        while(l1!=NULL)
-        {
-            prev = l1;
-            ans = l1->val + carry;
-            carry = ans/10;
-            value = ans%10;
-            ListNode* k = new ListNode(value);
-            n->next = k;
-            n = n->next;
-            l1 = l1->next;
-        }
-        while(l2!=NULL)
-        {
-            prev = l2;
-            ans = l2->val + carry;
-            carry = ans/10;
-            value = ans%10;
-            ListNode* k = new ListNode(value);
-            n->next = k;
-            n = n->next;
-            l2 = l2->next;
-        }
-        if(carry>0)
-        {
-            ListNode* k = new ListNode(carry);
-            n->next = k;
-        }
-        return fin->next;
+        
+        return l->next;
     }
 };
