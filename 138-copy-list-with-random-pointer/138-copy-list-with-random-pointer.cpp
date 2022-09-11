@@ -37,7 +37,6 @@ public:
         while(temp!=NULL)
         {
             mp[temp]->random = mp[temp->random];
-            cout << mp[temp]->val  << endl;
             temp = temp->next;
         }
         
