@@ -1,30 +1,25 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
-        int maxi = INT_MIN, i, var, ans=0;
-        int n = height.size();
-        // cout << n << endl;
-        int dp1[100000]={0};
-        int dp2[100000]={0};
+        int i, j, left, right, n = height.size(), maxi=0;
+        int prefix[n], suffix[n];
         
-        for(i=0;i<n;++i)
-        {
-            maxi = max(maxi, height[i]);
-            dp1[i] = maxi;
-        }
-        maxi = INT_MIN;
-        for(i=n-1;i>=0;--i)
-        {
-            maxi = max(maxi, height[i]);
-            dp2[i] = maxi;
-        }
-        
+        prefix[0] = height[0];
         for(i=1;i<n;++i)
         {
-            var = min(dp1[i-1], dp2[i+1]);
-            ans += var>height[i]?var-height[i]:0;
+            prefix[i] = max(prefix[i-1], height[i]);
         }
         
-        return ans;
+        suffix[n-1] = height[n-1];
+        for(i=n-2;i>=0;--i)
+        {
+            suffix[i] = max(suffix[i+1], height[i]);
+        }
+        for(i=0;i<n;++i)
+        {
+            maxi += min(prefix[i], suffix[i]) - height[i];
+        }
+        
+        return maxi;
     }
 };
